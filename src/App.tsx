@@ -63,7 +63,7 @@ function App() {
             </p>
             <div className="hero-links">
               <a href="#featured-projects">see my work <span aria-hidden="true">-&gt;</span></a>
-              <a href="mailto:emma.kalantar@gmail.com">say hello <span aria-hidden="true">-&gt;</span></a>
+              <a href="#contact">say hello <span aria-hidden="true">-&gt;</span></a>
             </div>
           </div>
           <img
@@ -113,10 +113,37 @@ function App() {
         </section>
 
         <section id="about">
-          <div className="about-copy">
+          <div className="about">
             <h4>more, longer about me</h4>
             <p>
-              ⚠️⚠️⚠️⚠️⚠️⚠️ le placeholder text ⚠️⚠️⚠️⚠️⚠️⚠️
+              ⚠️⚠️⚠️⚠️⚠️⚠️ hi i'm some placeholder text ⚠️⚠️⚠️⚠️⚠️⚠️
+            </p>
+          </div>
+        </section>
+
+        <section id="experience">
+          <div className="experience">
+            <h4>experience</h4>
+            <p>
+              ⚠️⚠️⚠️⚠️⚠️⚠️ as a child i yearned for the placeholder text ⚠️⚠️⚠️⚠️⚠️⚠️
+            </p>
+          </div>
+        </section>
+
+        <section id="skills">
+          <div className="skills">
+            <h4>skills</h4>
+            <p>
+              ⚠️⚠️⚠️⚠️⚠️⚠️ good at making placeholder text ⚠️⚠️⚠️⚠️⚠️⚠️
+            </p>
+          </div>
+        </section>
+
+        <section id="contact">
+          <div className="contact">
+            <h4>contact</h4>
+            <p>
+              ⚠️⚠️⚠️⚠️⚠️⚠️ talk to me with placeholder text ⚠️⚠️⚠️⚠️⚠️⚠️
             </p>
           </div>
         </section>
