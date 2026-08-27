@@ -53,11 +53,18 @@ function App() {
         <Navbar />
         <section id="hero">
           <div className="hero-copy">
-            <p>hi, I'm</p>
+            <p className="hero-kicker">hi, I'm</p>
             <h1>emma kalantar</h1>
             <p className="typewriter-line" aria-live="polite">
               {typedText}<span className="typewriter-cursor" aria-hidden="true">|</span>
             </p>
+            <p className="hero-intro">
+              I'm a third-year computer science student at UBC, interested in full stack development, machine learning, and human-computer interaction. Use your code-fu for good, not evil.
+            </p>
+            <div className="hero-links">
+              <a href="#featured-projects">see my work <span aria-hidden="true">-&gt;</span></a>
+              <a href="mailto:emma.kalantar@gmail.com">say hello <span aria-hidden="true">-&gt;</span></a>
+            </div>
           </div>
           <img
             className="image-placeholder"
@@ -65,18 +72,24 @@ function App() {
             alt="Emma Kalantar"
           />
           <div className="quick-facts">
-            <h4>quick facts</h4>
+            <div className="quick-facts-heading">
+              <span className="quick-facts-number">01</span>
+              <h4>quick facts</h4>
+            </div>
             <ul className="quick-facts-list">
-              <li>✦ Coquitlam, BC</li>
-              <li>✦ UBC CS+biology+physics, Class of 2028</li>
-              <li>✦ fullstack development, machine learning, HCI</li>
-              <li>✦ stack: Python, Java, React, TypeScript, Tailwind CSS</li>
-              <li>✦ boba order: iced matcha with brown sugar pearls, 70% sugar</li>
+              <li>Coquitlam, BC</li>
+              <li>UBC CS+biology+physics, class of 2028*</li>
+              <li>stack: Python, Java, React, TypeScript, Tailwind CSS</li>
+              <li>boba order: iced matcha with brown sugar pearls, 70% sugar</li>
             </ul>
+            <p style={{ fontSize: '0.8rem', opacity: 0.75 }}>
+              *we hope
+            </p>
           </div>
         </section>
 
         <section id="featured-projects">
+          <h4>the favourite children</h4>
           <div className="featured-projects">
             <ProjectCard
               title="this site!"
@@ -96,6 +109,15 @@ function App() {
               technologies={['Python', 'NLP', 'NLTK']}
               link="https://github.com/emkalan/subsense"
             />
+          </div>
+        </section>
+
+        <section id="about">
+          <div className="about-copy">
+            <h4>more, longer about me</h4>
+            <p>
+              ⚠️⚠️⚠️⚠️⚠️⚠️ le placeholder text ⚠️⚠️⚠️⚠️⚠️⚠️
+            </p>
           </div>
         </section>
 
