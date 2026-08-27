@@ -1,0 +1,14 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    /* grid-row: 1 / 3; */
+    height: 95vh;
+    background-color: black;
+    padding: 10%;
+}
+
+.nav-bottom {
+    margin-top: auto;
+}
