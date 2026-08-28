@@ -251,3 +251,52 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+#about {
+  grid-column: 2;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: var(--accent-bg);
+}
+
+#experience {
+  grid-column: 2;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: var(--accent-bg);
+}
+
+#skills {
+  grid-column: 2;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: var(--accent-bg);
+}
+
+#contact {
+  grid-column: 2;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: var(--accent-bg);
+}
+
+@media (max-width: 900px) {
+  #about,
+  #experience,
+  #skills,
+  #contact {
+    grid-column: 1;
+  }
+}

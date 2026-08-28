@@ -1,11 +1,16 @@
-import { Chip } from '@mui/material';
+import { Chip, Tooltip } from '@mui/material';
 import React from 'react';
 import './ProjectCard.css';
+
+type Technology = {
+    name: string;
+    description: string;
+};
 
 type ProjectCardProps = {
     title: string;
     description: string;
-    technologies: string[];
+    technologies: Technology[];
     link?: string;
 };
 
@@ -24,12 +29,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, technolog
             <p>{description}</p>
             <div className="technologies">
                 {technologies.map((technology) => (
-                    <Chip className="technology-chip"
-                        key={technology}
-                        label={technology}
-                        size="small"
-                        variant="outlined"
-                    />
+                    <Tooltip key={technology.name} title={technology.description} arrow slotProps={{
+                        tooltip: {
+                            className: 'technology-tooltip',
+                        },
+                        arrow: {
+                            className: 'tooltip-arrow',
+                        }
+                    }}>
+                        <Chip className="technology-chip"
+                            label={technology.name}
+                            size="small"
+                            variant="outlined"
+                        />
+                    </Tooltip>
                 ))}
             </div>
         </article>

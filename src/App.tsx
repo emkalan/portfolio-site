@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Pettable from './Pettable'
 import Navbar from './Navbar';
 import ProjectCard from './ProjectCard';
 
@@ -59,18 +60,21 @@ function App() {
               {typedText}<span className="typewriter-cursor" aria-hidden="true">|</span>
             </p>
             <p className="hero-intro">
-              I'm a third-year computer science student at UBC, interested in full stack development, machine learning, and human-computer interaction. Use your code-fu for good, not evil.
+              i'm a third-year computer science student at UBC, interested in full stack development, machine learning, and human-computer interaction. use your code-fu for good, not evil
             </p>
             <div className="hero-links">
               <a href="#featured-projects">see my work <span aria-hidden="true">-&gt;</span></a>
               <a href="#contact">say hello <span aria-hidden="true">-&gt;</span></a>
             </div>
           </div>
-          <img
-            className="image-placeholder"
-            src="/emma.jpg"
-            alt="Emma Kalantar"
-          />
+          <Pettable>
+            <img
+              className="image-placeholder"
+              src="/emma.jpg"
+              alt="Emma Kalantar"
+            />
+          </Pettable>
+
           <div className="quick-facts">
             <div className="quick-facts-heading">
               <span className="quick-facts-number">01</span>
@@ -94,19 +98,32 @@ function App() {
             <ProjectCard
               title="this site!"
               description="the portfolio you're looking at right now, with a modern stack and reactive design"
-              technologies={['React', 'TypeScript', 'Tailwind CSS']}
+              technologies={[
+                { name: 'React', description: 'powers the interactive interface and reusable project cards' },
+                { name: 'TypeScript', description: 'keeps component props and project data predictable and type-safe' },
+                { name: 'Tailwind CSS', description: 'provides the responsive layout and utility-first styling' },
+              ]}
               link="https://github.com/emkalan/" /* todo: make a repo */
             />
             <ProjectCard
               title="emCyclopedia"
               description="a proof of concept LSTM model trained on wikitext-2 to generate text in the style of Wikipedia articles"
-              technologies={['Python', 'PyTorch', 'NLP', 'Jupyter Notebook']}
+              technologies={[
+                { name: 'Python', description: 'handles data preparation and the text-generation pipeline' },
+                { name: 'PyTorch', description: 'trains the LSTM model to produce Wikipedia-style text' },
+                { name: 'NLP', description: 'shapes raw language into learnable, article-like patterns' },
+                { name: 'Jupyter Notebook', description: 'supports experiments, training runs, and result inspection' },
+              ]}
               link="https://github.com/emkalan/emcyclopedia"
             />
             <ProjectCard
               title="subsense"
               description="a general-purpose sentiment mapper for .srt files over the runtime of a video, via VADER sentiment analysis"
-              technologies={['Python', 'NLP', 'NLTK']}
+              technologies={[
+                { name: 'Python', description: 'parses subtitle files and maps sentiment across a video timeline' },
+                { name: 'NLP', description: 'turns subtitle language into a readable emotional signal' },
+                { name: 'NLTK', description: 'provides VADER scoring for each subtitle segment' },
+              ]}
               link="https://github.com/emkalan/subsense"
             />
           </div>
