@@ -77,7 +77,7 @@ function App() {
               </Pettable>
               <span className="portrait-sticker" aria-hidden="true">a very good<br />code buddy</span>
             </div>
-            <figcaption>my favorite coworker is very good at taking breaks. (pet her with your cursor)</figcaption>
+            <figcaption>my favourite coworker is very good at taking breaks. (pet her with your cursor)</figcaption>
           </figure>
 
           <a className="scroll-cue" href="#about"><span aria-hidden="true">↓</span> a little more about me</a>
