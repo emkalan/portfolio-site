@@ -1,31 +1,105 @@
+.site-header {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    display: flex;
+    width: 100%;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-inline: max(calc((100% - 1160px) / 2), 1.5rem);
+    border-bottom: 1px solid #382a42cc;
+    background: #0c0910ed;
+    backdrop-filter: blur(14px);
+}
+
+.brand-mark {
+    flex: 0 0 auto;
+    color: #f7effa;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.4rem;
+    letter-spacing: -0.06em;
+    text-decoration: none;
+}
+
+.brand-mark span {
+    margin-left: 0.15rem;
+    color: #ff9dd2;
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    vertical-align: top;
+}
+
 .navbar {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    box-sizing: border-box;
-    background-color: black;
-    padding: 10%;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2.4rem);
 }
 
-.nav-bottom {
-    margin-top: auto;
+.navbar a,
+.nav-contact {
+    color: #b8acbd;
+    font-size: 0.76rem;
+    text-decoration: none;
+    transition: color 160ms ease;
 }
 
-a:hover {
-    text-shadow: 0px 0px 10px rgb(255, 255, 255);
+.navbar a:hover,
+.nav-contact:hover {
+    color: #f7effa;
 }
 
-p {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
+.nav-contact {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid #493653;
+    border-radius: 3px;
+    color: #f7effa;
+    font-weight: 600;
 }
 
-@media (max-width: 900px) {
+.nav-contact:hover {
+    border-color: #ff9dd2;
+}
+
+@media (max-width: 680px) {
+    .site-header {
+        min-height: 66px;
+        gap: 1rem;
+        padding-inline: 1.125rem;
+    }
+
     .navbar {
-        position: static;
+        flex: 1;
+        justify-content: flex-end;
+        gap: clamp(0.8rem, 3vw, 1.2rem);
+    }
+
+    .navbar a {
+        font-size: 0.7rem;
+    }
+
+    .nav-contact {
+        display: none;
+    }
+}
+
+@media (max-width: 380px) {
+    .site-header {
+        gap: 0.7rem;
+        padding-inline: 0.875rem;
+    }
+
+    .navbar {
+        gap: 0.65rem;
+    }
+
+    .navbar a {
+        font-size: 0.65rem;
     }
 }

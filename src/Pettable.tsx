@@ -13,16 +13,15 @@ export default function Pettable({ children }: PettableProps) {
     time: number;
   } | null>(null);
 
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastPet = useRef(0);
 
   const { reward, isAnimating } = useReward(
     targetRef as unknown as React.RefObject<HTMLElement>,
     "hearts",
     {
-      particleCount: 8,
+      particleCount: 6,
       spread: 30,
-      elementSize: 60,
+      elementSize: 48,
       lifetime: 105,
       physics: {
         gravity: 0.2,
@@ -34,6 +33,7 @@ export default function Pettable({ children }: PettableProps) {
   useEffect(() => {
     const target = targetRef.current;
     if (!target) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const now = performance.now();
@@ -46,20 +46,9 @@ export default function Pettable({ children }: PettableProps) {
         const elapsed = now - lastMouse.current.time;
         const speed = distance / Math.max(elapsed, 1);
 
-        if (speed > 0.1) {
-          if (timer.current) {
-            clearTimeout(timer.current);
-          }
-
-          if (
-            now - lastPet.current > 5 &&
-            !isAnimating
-          ) {
-            timer.current = setTimeout(() => {
-              reward();
-              lastPet.current = performance.now();
-            }, 1);
-          }
+        if (distance > 8 && speed > 0.12 && now - lastPet.current > 650 && !isAnimating) {
+          reward();
+          lastPet.current = now;
         }
       }
 
@@ -74,10 +63,6 @@ export default function Pettable({ children }: PettableProps) {
 
     return () => {
       target.removeEventListener("mousemove", handleMouseMove);
-
-      if (timer.current) {
-        clearTimeout(timer.current);
-      }
     };
   }, [reward, isAnimating]);
 

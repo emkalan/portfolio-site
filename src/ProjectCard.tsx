@@ -1,23 +1,21 @@
-import { Chip, Tooltip } from '@mui/material';
-import React from 'react';
 import './ProjectCard.css';
 
-type Technology = {
-    name: string;
-    description: string;
-};
-
 type ProjectCardProps = {
+    number: string;
     title: string;
     description: string;
-    technologies: Technology[];
+    technologies: string[];
     link?: string;
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, technologies, link }) => {
+function ProjectCard({ number, title, description, technologies, link }: ProjectCardProps) {
     return (
         <article className="project-card">
-            <h2>
+            <div className="project-card-top">
+                <span className="project-number">{number}</span>
+                <span className="project-arrow" aria-hidden="true">↗</span>
+            </div>
+            <h3>
                 {link ? (
                     <a href={link} target="_blank" rel="noreferrer noopener">
                         {title}
@@ -25,28 +23,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, technolog
                 ) : (
                     title
                 )}
-            </h2>
+            </h3>
             <p>{description}</p>
             <div className="technologies">
                 {technologies.map((technology) => (
-                    <Tooltip key={technology.name} title={technology.description} arrow slotProps={{
-                        tooltip: {
-                            className: 'technology-tooltip',
-                        },
-                        arrow: {
-                            className: 'tooltip-arrow',
-                        }
-                    }}>
-                        <Chip className="technology-chip"
-                            label={technology.name}
-                            size="small"
-                            variant="outlined"
-                        />
-                    </Tooltip>
+                    <span className="technology-chip" key={technology}>
+                        {technology}
+                    </span>
                 ))}
             </div>
+            {link && <a className="project-link" href={link} target="_blank" rel="noreferrer noopener">View project <span aria-hidden="true">↗</span></a>}
         </article>
     );
-};
+}
 
 export default ProjectCard;
