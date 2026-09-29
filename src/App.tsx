@@ -287,7 +287,7 @@ function App() {
                   <span className="grave-marker-cross" aria-hidden="true">✳</span>
                   <span className="grave-marker-rip" aria-hidden="true">RIP</span>
                   <span className="grave-marker-name">{idea.name}</span>
-                  <span className="grave-marker-date" aria-hidden="true">NOT YET</span>
+                  <span className="grave-marker-date" aria-hidden="true">yet unborn</span>
                 </button>
               ))}
             </div>
