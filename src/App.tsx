@@ -58,7 +58,7 @@ function App() {
               {typedText}<span className="typewriter-cursor">|</span>
             </p>
             <p className="hero-intro">
-              i'm a third-year computer science student at UBC. i'm into web development, machine learning, and HCI—basically, building cool things and thinking about the humans using them. use your code-fu for good, not evil.
+              i'm a third-year computer science student at UBC. i'm into swe, webdev, machine learning, and HCI, basically building cool things and thinking about the humans using them. use your code-fu for good, not evil
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">see what i've made <span aria-hidden="true">↘</span></a>
@@ -89,8 +89,8 @@ function App() {
             <h2 id="about-title">a bit about me.<br /><span>and what i'm into.</span></h2>
           </div>
           <div className="about-copy">
-            <p className="lead-copy">i'm in my third year of computer science at UBC. i like web development, machine learning, and human-computer interaction—which is a long way of saying i care about both how things work and how they feel to use.</p>
-            <p>i've been playing with language models (see: emCyclopedia) and making little tools like subsense. still figuring out what i want to build when i grow up. probably something useful, hopefully something fun.</p>
+            <p className="lead-copy">i'm in my third year of computer science + life sciences + physics at UBC. i like web development, machine learning, human-computer interaction, and a lot of other things, which is a long way of saying i care about both how things work and how they feel to use.</p>
+            <p>i've been playing with language models (see: emCyclopedia) and making little tools like subsense. still figuring out what i want to build when i grow up. probably something useful, hopefully something fun</p>
             <p className="personal-note"><span aria-hidden="true">✳</span> current boba order: iced matcha, brown sugar pearls, 70% sugar</p>
           </div>
         </section>
@@ -122,7 +122,7 @@ function App() {
               <ProjectCard
                 number="03"
                 title="this portfolio"
-                description="this very site! a place to put my projects, a few thoughts, and one moral support dog."
+                description="this very site! a place to put my projects, a few thoughts, and one dog that doesn't have much to do with any of it"
                 technologies={['React', 'TypeScript', 'Vite', 'CSS']}
               />
             </div>
@@ -144,7 +144,7 @@ function App() {
             <article className="focus-card">
               <span className="focus-number">02</span>
               <h3>full-stack development</h3>
-              <p>i like thinking about the whole thing: what you see, what happens behind the scenes, and how the two fit together.</p>
+              <p>i like thinking about the whole thing: what you see, what happens behind the scenes, and how the two fit together</p>
             </article>
             <article className="focus-card">
               <span className="focus-number">03</span>
@@ -176,7 +176,7 @@ function App() {
         <section className="contact-section section-wrap" id="contact" aria-labelledby="contact-title">
           <p className="eyebrow">05 / your turn</p>
           <h2 id="contact-title">got something<br />good in <span>mind?</span></h2>
-          <p className="contact-copy">internship lead? fun project? excellent boba recommendation? my GitHub is the best place to find me.</p>
+          <p className="contact-copy">internship lead? fun project? excellent boba recommendation? my GitHub is the best place to find me</p>
           <a className="button button-light" href="https://github.com/emkalan" target="_blank" rel="noreferrer noopener">
             come say hi on GitHub <span aria-hidden="true">↗</span>
           </a>
