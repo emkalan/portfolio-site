@@ -1,0 +1,291 @@
+.graveyard-section {
+  padding-block: 6.5rem 5rem;
+  background: #100c15;
+  border-top: 1px solid #382a42;
+}
+
+.graveyard-heading {
+  align-items: end;
+  margin-bottom: 3rem;
+}
+
+.graveyard-heading h2 span {
+  color: #a88ab9;
+}
+
+.graveyard-intro {
+  max-width: 330px;
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.graveyard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 4vw, 3.5rem);
+  align-items: end;
+  padding: 0.5rem clamp(0rem, 3vw, 2rem) 2rem;
+  border-bottom: 1px solid #382a42;
+}
+
+.grave-marker {
+  position: relative;
+  display: flex;
+  min-height: 210px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 1.25rem 0.75rem 1rem;
+  overflow: hidden;
+  border: 1px solid #594765;
+  border-bottom-width: 5px;
+  border-radius: 48% 48% 3px 3px / 22% 22% 3px 3px;
+  color: #d6c9dd;
+  background: linear-gradient(145deg, #302438 0%, #211927 75%);
+  box-shadow: inset 0 0 22px #c49aff0a, 0 12px 24px #00000028;
+  cursor: pointer;
+  transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.grave-marker:nth-child(even) {
+  min-height: 185px;
+}
+
+.grave-marker:hover,
+.grave-marker:focus-visible {
+  z-index: 1;
+  border-color: #b28bc5;
+  background: linear-gradient(145deg, #45334d 0%, #2a2031 75%);
+  box-shadow: inset 0 0 30px #c49aff14, 0 16px 32px #00000050;
+  transform: translateY(-7px) rotate(-1deg);
+}
+
+.grave-marker:nth-child(even):hover,
+.grave-marker:nth-child(even):focus-visible {
+  transform: translateY(-7px) rotate(1deg);
+}
+
+.grave-marker:focus-visible,
+.graveyard-close:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.grave-marker-cross {
+  color: #d0a9df;
+  font-size: 1.1rem;
+  transition: transform 250ms ease;
+}
+
+.grave-marker:hover .grave-marker-cross,
+.grave-marker:focus-visible .grave-marker-cross {
+  transform: rotate(45deg);
+}
+
+.grave-marker-rip {
+  color: #aa9bb1;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+}
+
+.grave-marker-name {
+  max-width: 100%;
+  color: #fff2fc;
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.15;
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.grave-marker:hover .grave-marker-name,
+.grave-marker:focus-visible .grave-marker-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grave-marker-date {
+  margin-top: 0.15rem;
+  color: #a99aac;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+}
+
+.graveyard-footnote {
+  margin-top: 1.25rem;
+  color: #9b8ca2;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-align: right;
+}
+
+.graveyard-footnote span {
+  margin-right: 0.35rem;
+  color: #c49aff;
+}
+
+.graveyard-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  overflow-y: auto;
+  background: #08060bd9;
+  backdrop-filter: blur(8px);
+  animation: graveyard-fade-in 160ms ease both;
+}
+
+.graveyard-modal {
+  position: relative;
+  width: min(100%, 620px);
+  max-height: min(90vh, 800px);
+  padding: clamp(1.4rem, 5vw, 2.6rem);
+  overflow-y: auto;
+  border: 1px solid #674e73;
+  background: #1b1421;
+  box-shadow: 0 24px 90px #00000080;
+  animation: graveyard-rise-in 200ms ease both;
+}
+
+.graveyard-modal-topline {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.graveyard-modal .eyebrow {
+  margin-top: 0.25rem;
+  color: #c6b3d0;
+  font-size: 0.62rem;
+}
+
+.graveyard-close {
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #594765;
+  border-radius: 50%;
+  color: var(--ink);
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.graveyard-close:hover {
+  border-color: var(--accent);
+  color: #160f1c;
+  background: var(--accent);
+}
+
+.graveyard-modal h2 {
+  margin: 1rem 0 1.7rem;
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.graveyard-modal h2 span {
+  color: var(--accent);
+}
+
+.graveyard-detail {
+  padding-block: 1rem;
+  border-top: 1px solid #382a42;
+}
+
+.graveyard-detail h3 {
+  margin: 0 0 0.55rem;
+  color: #d9a8d0;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.graveyard-detail p {
+  color: #c8bdce;
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+.graveyard-modal-signoff {
+  margin-top: 0.8rem;
+  color: #a99aac;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  line-height: 1.7;
+}
+
+.graveyard-modal-signoff span {
+  color: var(--accent);
+}
+
+@keyframes graveyard-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes graveyard-rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (hover: none) {
+  .grave-marker-name {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .graveyard-section {
+    padding-block: 5rem 3.5rem;
+  }
+
+  .graveyard-heading {
+    margin-bottom: 2rem;
+  }
+
+  .graveyard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .grave-marker,
+  .grave-marker:nth-child(even) {
+    min-height: 175px;
+  }
+
+  .grave-marker-name {
+    font-size: 1rem;
+  }
+
+  .graveyard-modal {
+    max-height: 88vh;
+  }
+}
+
+@media (max-width: 380px) {
+  .grave-marker,
+  .grave-marker:nth-child(even) {
+    min-height: 160px;
+    padding-inline: 0.4rem;
+  }
+}

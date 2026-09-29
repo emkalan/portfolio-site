@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
+import { createPortal } from 'react-dom'
 import './App.css'
+import './ProjectGraveyard.css'
 import Pettable from './Pettable'
 import Navbar from './Navbar'
 import ProjectCard from './ProjectCard'
@@ -17,10 +19,47 @@ const skillGroups = [
   { title: 'Interests', skills: ['Machine learning', 'Human-computer interaction', 'Full-stack development'] },
 ]
 
+const graveyardProjects = [
+  {
+    name: "Stagehand",
+    what: 'a character-inspired desktop agent with a custom LM frontend: part useful assistant, part bespoke lab partner. the fun would be shaping the interface, character, and boundaries around the model',
+    tools: 'React · Electron · local or hosted LMs · an aggressively dramatic UI',
+    whyDead: 'what should it actually do? i haven\'t figured that out yet, or how to make it useful without being creepy, or how the pipeline between model and desktop would work. maybe one day, but not right now',
+  },
+  {
+    name: 'Blawg',
+    what: 'a Unity dog simulator where little virtual dogs learn to explore, chase toys, and generally be a dog using reinforcement learning',
+    tools: 'Unity · C# · reinforcement learning · tiny virtual tennis balls',
+    whyDead: 'RL is a lot of work, not to mention making a game people can play. also i have a real dog, and she is a lot of work too',
+  },
+  {
+    name: 'A Penny for Your Thoughts',
+    what: '“a penny for your thoughts” as a tiny web experiment: simple models pay 2 cents to post, and make 1 cent for every reply',
+    tools: 'React · TypeScript · simple language models · a very small pile of pennies',
+    whyDead: 'the idea is cute, but the implementation is a lot of work for a small payoff. i don\'t know how to make it work without being super computationally expensive, maybe a simpler version could be fun, but i want to focus on other things right now',
+  },
+  {
+    name: 'The Card-Holding Dottore Case',
+    what: 'a decora phone case with an actual slot for all the cards i carry around, so they don\'t fall out when i drop my phone. the case would be a little shrine to my favourite character from genshin impact, and the cards would be a little shrine to my favourite character from real life: me',
+    tools: '3D modeling · my little brother\'s 3D printer · fit tests · a card that I can sacrifice to prototyping',
+    whyDead: 'phone dimensions and print tolerances are unforgiving, and a case that drops my cards is not a case. also PLA would suck for this, and i don\'t have a good way to print in TPU',
+  },
+  {
+    name: 'Noobberg Terminal',
+    what: 'trading model that just barely breaks even sometimes hopefully, making predictions and piping them into LMs to generate an almost coherent narrative about the market',
+    tools: 'Python · PyTorch · LLMs · a lot of money that i don\'t have',
+    whyDead: 'it would take a lot of time and data to train a trading model also i am lazy',
+  },
+]
+
 function App() {
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [typedText, setTypedText] = useState(phrases[0])
   const [isDeleting, setIsDeleting] = useState(false)
+  const [selectedIdea, setSelectedIdea] = useState<(typeof graveyardProjects)[number] | null>(null)
+  const modalRef = useRef<HTMLElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const lastTriggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -44,6 +83,47 @@ function App() {
 
     return () => window.clearTimeout(timer)
   }, [phraseIndex, typedText, isDeleting])
+
+  useEffect(() => {
+    if (!selectedIdea) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [selectedIdea])
+
+  const closeGraveyardModal = () => {
+    setSelectedIdea(null)
+    window.setTimeout(() => lastTriggerRef.current?.focus(), 0)
+  }
+
+  const trapModalFocus = (event: ReactKeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      closeGraveyardModal()
+      return
+    }
+
+    if (event.key !== 'Tab') return
+
+    const focusableElements = modalRef.current?.querySelectorAll<HTMLElement>(
+      'button, a[href], [tabindex]:not([tabindex="-1"])',
+    )
+    if (!focusableElements?.length) return
+
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault()
+      lastElement.focus()
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault()
+      firstElement.focus()
+    }
+  }
 
   return (
     <div className="site-shell" id="top">
@@ -181,6 +261,39 @@ function App() {
             come say hi on GitHub <span aria-hidden="true">↗</span>
           </a>
         </section>
+
+        <section className="graveyard-section" id="graveyard" aria-labelledby="graveyard-title">
+          <div className="section-wrap">
+            <div className="section-heading projects-heading graveyard-heading">
+              <div>
+                <p className="eyebrow">06 / gone, but not forgotten</p>
+                <h2 id="graveyard-title">the project <span>graveyard.</span></h2>
+              </div>
+              <p className="graveyard-intro">little ideas that didn't make it out of the notes app (yet). hover for the name; click to dig up the skeleton</p>
+            </div>
+
+            <div className="graveyard-grid">
+              {graveyardProjects.map((idea) => (
+                <button
+                  className="grave-marker"
+                  key={idea.name}
+                  type="button"
+                  aria-label={`Open ${idea.name} project idea details`}
+                  onClick={(event) => {
+                    lastTriggerRef.current = event.currentTarget
+                    setSelectedIdea(idea)
+                  }}
+                >
+                  <span className="grave-marker-cross" aria-hidden="true">✳</span>
+                  <span className="grave-marker-rip" aria-hidden="true">RIP</span>
+                  <span className="grave-marker-name">{idea.name}</span>
+                  <span className="grave-marker-date" aria-hidden="true">NOT YET</span>
+                </button>
+              ))}
+            </div>
+            <p className="graveyard-footnote"><span aria-hidden="true">✳</span> some day, perhaps.</p>
+          </div>
+        </section>
       </main>
 
       <footer className="site-footer section-wrap">
@@ -189,6 +302,44 @@ function App() {
         <a href="https://github.com/emkalan" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
         <span>© {new Date().getFullYear()} Emma Kalantar</span>
       </footer>
+
+      {selectedIdea && createPortal(
+        <div
+          className="graveyard-backdrop"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) closeGraveyardModal()
+          }}
+        >
+          <section
+            className="graveyard-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="graveyard-dialog-title"
+            ref={modalRef}
+            onKeyDown={trapModalFocus}
+          >
+            <div className="graveyard-modal-topline">
+              <p className="eyebrow">here lies:</p>
+              <button className="graveyard-close" ref={closeButtonRef} type="button" onClick={closeGraveyardModal} aria-label="Close project details">×</button>
+            </div>
+            <h2 id="graveyard-dialog-title">{selectedIdea.name}<span>.</span></h2>
+            <div className="graveyard-detail">
+              <h3>the idea</h3>
+              <p>{selectedIdea.what}</p>
+            </div>
+            <div className="graveyard-detail">
+              <h3>possible tools / materials</h3>
+              <p>{selectedIdea.tools}</p>
+            </div>
+            <div className="graveyard-detail">
+              <h3>why it's resting</h3>
+              <p>{selectedIdea.whyDead}</p>
+            </div>
+            <p className="graveyard-modal-signoff">not abandoned. just... aggressively deprioritized <span aria-hidden="true">✳</span></p>
+          </section>
+        </div>,
+        document.body,
+      )}
     </div>
   )
 }
